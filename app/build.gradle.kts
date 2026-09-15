@@ -31,8 +31,8 @@ android {
         applicationId = "com.sam1112220.watchtranslate"
         minSdk = 30
         targetSdk = 34
-        versionCode = 34
-        versionName = "1.0.30"
+        versionCode = 35
+        versionName = "1.0.31"
         resourceConfigurations += listOf("zh", "en")
 
         ndk {
