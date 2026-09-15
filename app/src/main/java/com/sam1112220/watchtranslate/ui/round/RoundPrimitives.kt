@@ -286,23 +286,6 @@ fun RoundScaffold(
         ) {
             val c = Offset(size.width / 2f, size.height / 2f)
             val px = k * density.density
-            // 外环导航：细圆环 + 四个切向胶囊（设计稿实测：环 r=225 描边 4；
-            // 胶囊中心线 r=207.5，151.6×18，活跃的那个放大到 153.7×20.1）
-            drawCircle(
-                color = Wt.NavIdle,
-                radius = Wt.R_RING * px,
-                center = c,
-                style = Stroke(width = 4f * px)
-            )
-
-            // 上下文弧带内缘细线（弱）
-            drawCircle(
-                color = Wt.Outline.copy(alpha = 0.7f),
-                radius = Wt.R_CTX_OUT * px,
-                center = c,
-                style = Stroke(width = 1.1f * px)
-            )
-
             listOf(270f, 0f, 90f, 180f).forEachIndexed { i, mid ->
                 // 翻译主页隐藏顶部 12 点导航（该位置放语种切换文字）
                 if (hideTopNav && i == 0) return@forEachIndexed
@@ -499,10 +482,10 @@ fun RoundScaffold(
         }
         // 四个斜对角的小按钮/小文字（弧形贴圆盘边缘）。
         // 角（Compose 角度，0=右/90=下/180=左/270=上）：左上=225°、右上=315°、左下=135°、右下=45°
-        if (cornerTopLeft.isNotBlank()) ArcTextLabel(cornerTopLeft, 225f, 46f, 205f, T.pageTitle.value, cornerTopLeftColor)
-        if (cornerTopRight.isNotBlank()) ArcTextLabel(cornerTopRight, 315f, 46f, 205f, T.pageTitle.value, cornerTopRightColor)
-        if (cornerBottomLeft.isNotBlank()) ArcTextLabel(cornerBottomLeft, 135f, 46f, 205f, T.pageTitle.value, cornerBottomLeftColor)
-        if (cornerBottomRight.isNotBlank()) ArcTextLabel(cornerBottomRight, 45f, 46f, 205f, T.pageTitle.value, cornerBottomRightColor)
+        if (cornerTopLeft.isNotBlank()) ArcTextLabel(cornerTopLeft, 225f, 46f, 205f, (T.pageTitle.value + 3f), cornerTopLeftColor)
+        if (cornerTopRight.isNotBlank()) ArcTextLabel(cornerTopRight, 315f, 46f, 205f, (T.pageTitle.value + 3f), cornerTopRightColor)
+        if (cornerBottomLeft.isNotBlank()) ArcTextLabel(cornerBottomLeft, 135f, 46f, 205f, (T.pageTitle.value + 3f), cornerBottomLeftColor)
+        if (cornerBottomRight.isNotBlank()) ArcTextLabel(cornerBottomRight, 45f, 46f, 205f, (T.pageTitle.value + 3f), cornerBottomRightColor)
     }
 }
 
@@ -610,6 +593,7 @@ private fun DrawScope.drawArcText(
             android.graphics.Typeface.SANS_SERIF,
             if (bold) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL
         )
+        isFakeBoldText = bold
     }
     val rect = android.graphics.RectF(
         c.x - radiusPx, c.y - radiusPx, c.x + radiusPx, c.y + radiusPx
