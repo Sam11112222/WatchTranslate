@@ -1,0 +1,58 @@
+# ================= 构建产物 =================
+*.apk
+*.aab
+*.ap_
+*.dex
+app/build/
+build/
+.gradle/
+.kotlin/
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+output-metadata.json
+baselineProfiles/
+
+# ================= 签名密钥（严禁入库） =================
+keystore.properties
+keystore/*.jks
+keystore/*.keystore
+keystore/*.p8
+keystore/*.p12
+*.jks
+*.keystore
+
+# ================= 本地 WorkBuddy 工作区（含日志/记忆/临时脚本/缓存）=================
+.workbuddy/
+
+# ================= 历史产物与临时文件（体积巨大） =================
+# 输出/ 存放历次打包的 APK（单个数百 MB~1.2GB）与参考图
+输出/
+资源/
+dist/
+*.tmp
+*.log
+
+# ================= 离线模型（不进仓库） =================
+# assets/models 合计约 408MB，其中 ASR encoder 单个 173.5MB，
+# 已超过 GitHub 单文件 100MB 硬限制，且模型体积大不适合进版本库。
+# 获取方式见 README「模型准备」一节，或运行 .workbuddy 里的下载脚本。
+app/src/main/assets/models/
+
+# ================= 备份 =================
+*.bak
+backup/
+*.orig
+
+# ================= IDE =================
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ================= 系统 =================
+desktop.ini
