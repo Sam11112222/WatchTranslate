@@ -1,0 +1,50 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  html,body{margin:0;padding:0;background:transparent}
+  #wrap{width:1024px;height:1024px}
+</style></head>
+<body>
+<div id="wrap">
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0.06" y1="0" x2="0.94" y2="1">
+      <stop offset="0"    stop-color="#43DCA6"/>
+      <stop offset="0.46" stop-color="#31C3C6"/>
+      <stop offset="1"    stop-color="#7B6BF6"/>
+    </linearGradient>
+    <radialGradient id="hl" cx="0.26" cy="0.18" r="0.78">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="shade" cx="0.78" cy="0.92" r="0.7">
+      <stop offset="0" stop-color="#1B0F4A" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#1B0F4A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 底：满幅渐变 + 顶部高光 + 右下暗部 -->
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <rect width="1024" height="1024" fill="url(#hl)"/>
+  <rect width="1024" height="1024" fill="url(#shade)"/>
+
+  <!-- 后排气泡（右上，半透明白） -->
+  <g fill="#FFFFFF" opacity="0.60" stroke="#0E2A38" stroke-opacity="0.28" stroke-width="14">
+    <rect x="430" y="238" width="348" height="322" rx="92"/>
+    <path d="M 706,486 L 782,486 L 736,596 Z"/>
+  </g>
+
+  <!-- 前排气泡（左下，实心白），外描一圈深色缝隙，保证与后排拉开层次 -->
+  <g fill="#FFFFFF" stroke="#0E2A38" stroke-opacity="0.42" stroke-width="16">
+    <rect x="250" y="460" width="348" height="322" rx="92"/>
+    <path d="M 322,724 L 258,830 L 392,742 Z"/>
+  </g>
+
+  <!-- 气泡内文字条 -->
+  <g fill="#0F2B39" opacity="0.90">
+    <rect x="308" y="548" width="216" height="40" rx="20"/>
+    <rect x="308" y="626" width="140" height="40" rx="20"/>
+  </g>
+</svg>
+</div>
+</body></html>

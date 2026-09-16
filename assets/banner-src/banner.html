@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<style>
+  @font-face { font-family:'NotoSC'; src:local('Noto Sans SC'); }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#fff}
+  .stage{
+    position:relative; width:1920px; height:1080px; overflow:hidden;
+    font-family:'Noto Sans SC','Microsoft YaHei',sans-serif;
+    background:
+      radial-gradient(46% 42% at 97% 0%,   rgba(88,178,204,.55) 0%, rgba(88,178,204,0) 62%),
+      radial-gradient(120% 88% at 50% -16%, rgba(255,255,255,.80) 0%, rgba(255,255,255,0) 58%),
+      radial-gradient(64% 56% at 6% 2%,    rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 62%),
+      linear-gradient(178deg,#9FCFDD 0%,#B4DAE4 20%,#C9E4EA 42%,#E0EFF3 66%,#EFF7F9 84%,#F5FAFB 100%);
+  }
+  /* 手势光晕：让手表从背景里浮起来 */
+  .halo{position:absolute;left:1330px;top:540px;width:900px;height:900px;transform:translate(-50%,-50%);
+        background:radial-gradient(closest-side,rgba(255,255,255,.85) 0%,rgba(255,255,255,.35) 48%,rgba(255,255,255,0) 72%)}
+
+  /* ============ 左侧品牌区 ============ */
+  .brand{position:absolute;left:120px;top:252px;width:700px}
+  .badge{display:inline-flex;align-items:center;gap:14px;background:#fff;border-radius:999px;
+         padding:15px 30px;box-shadow:0 14px 30px rgba(46,96,109,.13);
+         font-size:26px;font-weight:600;color:#3E7F94;letter-spacing:.5px}
+  .dot{width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#43DCA6,#31C3C6)}
+  .wordrow{display:flex;align-items:center;gap:30px;margin-top:40px}
+  .mark{width:124px;height:124px;border-radius:30px;object-fit:cover;
+        box-shadow:0 20px 42px rgba(46,96,109,.26)}
+  .cn{font-size:124px;font-weight:900;line-height:1;color:#2B5F70;letter-spacing:4px}
+  .en{font-size:40px;font-weight:800;color:#6C9FB0;letter-spacing:9px;padding-bottom:14px}
+  .tag{margin-top:34px;font-size:42px;font-weight:500;color:#3E7F94;letter-spacing:1.5px}
+  .rule{margin-top:40px;width:540px;height:1px;background:linear-gradient(90deg,rgba(43,95,112,.30),rgba(43,95,112,.02))}
+  .dev{margin-top:34px;font-size:32px;font-weight:500;color:#5C8B9C;letter-spacing:.5px}
+  .dev b{color:#2B5F70;font-weight:900;letter-spacing:.5px}
+  .url{margin-top:30px;display:inline-flex;align-items:center;gap:16px;background:#fff;border-radius:999px;
+       padding:17px 36px 19px 30px;box-shadow:0 16px 34px rgba(46,96,109,.15);
+       font-size:32px;font-weight:700;color:#2B5F70;letter-spacing:.6px}
+  .url svg{width:34px;height:34px;flex:none}
+
+  /* ============ 手表 ============ */
+  .watch{position:absolute;left:1330px;top:540px;width:520px;height:520px;transform:translate(-50%,-50%)}
+  .strap{position:absolute;left:50%;transform:translateX(-50%);width:196px;
+         background:linear-gradient(180deg,#2B3F48,#22333B);}
+  .strap.top{top:-210px;height:260px;clip-path:polygon(12% 0,88% 0,100% 100%,0 100%);
+             -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 72%);mask-image:linear-gradient(180deg,transparent 0%,#000 72%)}
+  .strap.bot{top:470px;height:158px;clip-path:polygon(0 0,100% 0,88% 100%,12% 100%);
+             -webkit-mask-image:linear-gradient(0deg,transparent 0%,#000 62%);mask-image:linear-gradient(0deg,transparent 0%,#000 62%)}
+  .case{position:absolute;inset:0;border-radius:50%;
+        background:linear-gradient(150deg,#F2FAFC 0%,#B9D6E0 22%,#EAF5F8 42%,#8FB6C4 66%,#DCEBF0 84%,#AFCDD8 100%);
+        box-shadow:0 46px 90px rgba(31,74,90,.30), 0 10px 26px rgba(31,74,90,.16), inset 0 2px 3px rgba(255,255,255,.9)}
+  .bezel{position:absolute;inset:16px;border-radius:50%;
+         background:linear-gradient(160deg,#16222A 0%,#0A1015 46%,#131E25 100%);
+         box-shadow:inset 0 4px 12px rgba(0,0,0,.9), inset 0 -3px 8px rgba(120,190,210,.16)}
+  .screen{position:absolute;inset:45px;border-radius:50%;overflow:hidden;background:#080A0E;
+          box-shadow:inset 0 0 0 2px rgba(140,200,220,.16)}
+  .screen img{width:100%;height:100%;display:block}
+  .gloss{position:absolute;inset:45px;border-radius:50%;
+         background:linear-gradient(146deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,.05) 26%,rgba(255,255,255,0) 46%),
+                    radial-gradient(120% 90% at 78% 108%, rgba(150,205,225,.14) 0%, rgba(0,0,0,0) 60%);
+         pointer-events:none}
+  /* 已按用户要求去掉表冠与侧键：表壳保持干净的整圆 */
+  .shadow{position:absolute;left:50%;top:497px;width:430px;height:74px;transform:translateX(-50%);
+          background:radial-gradient(closest-side,rgba(31,74,90,.30),rgba(31,74,90,0));border-radius:50%}
+
+  /* ============ 浮动信息卡 ============ */
+  .card{position:absolute;background:#fff;border-radius:26px;padding:24px 30px 26px;
+        box-shadow:0 20px 44px rgba(46,96,109,.13), 0 2px 6px rgba(46,96,109,.06)}
+  .card .lb{font-size:24px;font-weight:500;color:#7E939C;letter-spacing:1.2px}
+  .card .vl{margin-top:9px;font-size:38px;font-weight:800;color:#16262E;letter-spacing:.5px}
+  .pill{position:absolute;border-radius:999px;padding:22px 40px;color:#fff;font-size:30px;font-weight:700;
+        letter-spacing:1px;background:linear-gradient(120deg,#5FC8DF,#43AFD4);
+        box-shadow:0 22px 44px rgba(63,164,196,.36);display:flex;align-items:center;gap:18px}
+  .pill .pdot{width:16px;height:16px;border-radius:50%;background:#EAFBFF;box-shadow:0 0 0 6px rgba(255,255,255,.28)}
+</style></head>
+<body>
+<div class="stage">
+  <div class="halo"></div>
+
+  <!-- 左侧品牌区 -->
+  <div class="brand">
+    <div class="badge"><span class="dot"></span>端侧 AI · 全程离线</div>
+    <div class="wordrow">
+      <img class="mark" src="{{LOGO}}" alt="">
+      <div class="cn">腕语</div>
+    </div>
+    <div class="tag">腕上离线翻译 · 断网也能说</div>
+    <div class="rule"></div>
+    <div class="dev">开发者 <b>Sam1112220</b></div>
+    <div class="url">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#43AFD4" stroke-width="2" stroke-linecap="round">
+        <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18"/>
+      </svg>https://blog.sam1112220.xyz
+    </div>
+  </div>
+
+  <!-- 浮动信息卡 -->
+  <div class="card" style="left:780px;top:330px;width:305px">
+    <div class="lb">语音识别</div><div class="vl">端侧 · 流式</div>
+  </div>
+  <div class="card" style="left:780px;top:620px;width:305px">
+    <div class="lb">语音合成</div><div class="vl">系统 TTS</div>
+  </div>
+  <div class="card" style="left:1565px;top:330px;width:305px">
+    <div class="lb">翻译引擎</div><div class="vl">中 ⇄ 英</div>
+  </div>
+  <div class="card" style="left:1565px;top:620px;width:305px">
+    <div class="lb">网络请求</div><div class="vl">0 次</div>
+  </div>
+  <div class="pill" style="left:820px;top:918px">
+    <span class="pdot"></span>端侧引擎已就绪 · 无需联网
+  </div>
+
+  <!-- 手表 -->
+  <div class="watch">
+    <div class="strap top"></div>
+    <div class="strap bot"></div>
+    <div class="shadow"></div>
+    <div class="case">
+      <div class="bezel"></div>
+      <div class="screen"><img src="{{SHOT}}" alt=""></div>
+      <div class="gloss"></div>
+    </div>
+  </div>
+</div>
+</body></html>
