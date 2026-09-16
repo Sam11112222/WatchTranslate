@@ -1,8 +1,10 @@
 <div align="center">
 
-<img src="assets/images/logo.png" width="132" alt="离线翻译 Logo" />
+<img src="assets/images/logo.png" width="132" alt="腕语 TICTALK Logo" />
 
-# 离线翻译
+# 腕语 TICTALK
+
+**腕上离线翻译 · 断网也能说**
 
 **完全离线的中英互译应用，为 Android 手表的小屏交互而设计**
 
@@ -47,7 +49,7 @@
 <table>
 <tr>
 <td align="center"><img src="docs/screenshots/06_dialog_mic.png" width="180"><br><sub>聆听中</sub></td>
-<td align="center"><img src="docs/screenshots/07_dialog_result.png" width="180"><br><sub>识别与译文</sub></td>
+<td align="center"><img src="docs/screenshots/06_dialog_mic.png" width="180"><br><sub>对话进行中</sub></td>
 </tr>
 </table>
 
@@ -58,7 +60,7 @@
 <table>
 <tr>
 <td align="center"><img src="docs/screenshots/05_dialog_lang.png" width="180"><br><sub>选择语言</sub></td>
-<td align="center"><img src="docs/screenshots/07_dialog_result.png" width="180"><br><sub>对话结果</sub></td>
+<td align="center"><img src="docs/screenshots/06_dialog_mic.png" width="180"><br><sub>对话进行中</sub></td>
 </tr>
 </table>
 
