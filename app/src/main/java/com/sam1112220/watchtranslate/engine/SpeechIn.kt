@@ -240,6 +240,7 @@ class SpeechIn(private val ctx: Context) {
             var lastErr: Throwable? = null
             for (src in sources) {
                 try {
+                    @android.annotation.SuppressLint("MissingPermission")
                     val a = AudioRecord(
                         src,
                         SAMPLE_RATE,

@@ -6,6 +6,9 @@ import android.content.ClipboardManager
 import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
@@ -83,9 +86,9 @@ class AppVm(app: Application) : AndroidViewModel(app) {
     /** 装载阶段：EXTRACT 解压模型 / INIT 建立推理会话 / READY 就绪 / FAILED 失败 */
     var loadPhase by mutableStateOf("IDLE")
         private set
-    var loadDone by mutableStateOf(0L)
+    var loadDone by mutableLongStateOf(0L)
         private set
-    var loadTotal by mutableStateOf(0L)
+    var loadTotal by mutableLongStateOf(0L)
         private set
     var loadNote by mutableStateOf("端侧模型未装载")
         private set
@@ -323,7 +326,7 @@ class AppVm(app: Application) : AndroidViewModel(app) {
     var toLang by mutableStateOf(runCatching { Lang.valueOf(prefs.lastTo) }.getOrDefault(Lang.EN))
     var stage by mutableStateOf(Stage.IDLE)
     var result by mutableStateOf("")
-    var resultMs by mutableStateOf(0L)
+    var resultMs by mutableLongStateOf(0L)
     var busy by mutableStateOf(false)
 
     fun swapLangs() {
@@ -396,9 +399,9 @@ class AppVm(app: Application) : AndroidViewModel(app) {
 
     // ---------------- 历史 ----------------
     val historyItems = mutableStateListOf<HistoryItem>()
-    var historyCount by mutableStateOf(0)
+    var historyCount by mutableIntStateOf(0)
         private set
-    var lastHistoryId by mutableStateOf(-1L)
+    var lastHistoryId by mutableLongStateOf(-1L)
 
     fun reloadHistory() {
         val list = historyDb.list(200)
@@ -419,7 +422,7 @@ class AppVm(app: Application) : AndroidViewModel(app) {
 
     // ---------------- 短语本 ----------------
     val phraseCats: List<PhraseCategory> get() = phraseRepo.categories
-    var phraseCatIndex by mutableStateOf(0)
+    var phraseCatIndex by mutableIntStateOf(0)
 
     // ---------------- 板块 2 对话 ----------------
     var dialogStage by mutableStateOf(Stage.IDLE)
@@ -430,7 +433,7 @@ class AppVm(app: Application) : AndroidViewModel(app) {
     var recogFrom by mutableStateOf(Lang.ZH)
     var listening by mutableStateOf(false)
     var partial by mutableStateOf("")
-    var micLevel by mutableStateOf(0f)
+    var micLevel by mutableFloatStateOf(0f)
     var speechErr by mutableStateOf<String?>(null)
 
     init {
@@ -549,11 +552,11 @@ class AppVm(app: Application) : AndroidViewModel(app) {
     // ---------------- 板块 3 设置 ----------------
     var autoSpeak by mutableStateOf(prefs.autoSpeak)
         private set
-    var volume by mutableStateOf(prefs.volume)
+    var volume by mutableIntStateOf(prefs.volume)
         private set
-    var rate by mutableStateOf(prefs.rate)
+    var rate by mutableFloatStateOf(prefs.rate)
         private set
-    var pitch by mutableStateOf(prefs.pitch)
+    var pitch by mutableFloatStateOf(prefs.pitch)
         private set
     var voiceZh by mutableStateOf(prefs.voiceZh)
         private set
@@ -567,11 +570,11 @@ class AppVm(app: Application) : AndroidViewModel(app) {
     var speaking by mutableStateOf(false)
         private set
 
-    var assetBytes by mutableStateOf(0L)
+    var assetBytes by mutableLongStateOf(0L)
         private set
-    var appDataBytes by mutableStateOf(0L)
+    var appDataBytes by mutableLongStateOf(0L)
         private set
-    var freeBytes by mutableStateOf(0L)
+    var freeBytes by mutableLongStateOf(0L)
         private set
 
     fun refreshStats() {
