@@ -36,6 +36,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -80,7 +81,7 @@ fun RoundApp(vm: AppVm) {
     var editing by remember { mutableStateOf(false) }
     var keyboardForDialog by remember { mutableStateOf(false) }
     var toast by remember { mutableStateOf<String?>(null) }
-    var acc by remember { mutableStateOf(0f) }
+    var acc by remember { mutableFloatStateOf(0f) }
 
     LaunchedEffect(toast) {
         if (toast != null) {
@@ -643,6 +644,7 @@ private fun RoundPhrases(vm: AppVm, toast: (String) -> Unit) {
 }
 
 // =====================================================================
+@android.annotation.SuppressLint("WearRecents")
 private fun openUrl(ctx: android.content.Context, url: String, toast: (String) -> Unit) {
     runCatching {
         ctx.startActivity(

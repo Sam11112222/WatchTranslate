@@ -781,6 +781,7 @@ private fun RectPhrases(vm: AppVm) {
 }
 
 // =====================================================================
+@android.annotation.SuppressLint("WearRecents")
 private fun openUrl(ctx: android.content.Context, url: String) {
     runCatching {
         ctx.startActivity(

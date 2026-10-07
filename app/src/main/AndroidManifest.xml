@@ -16,7 +16,7 @@
     <!-- 面向手表，但 required=false 以便在手机上安装调试 -->
     <uses-feature
         android:name="android.hardware.type.watch"
-        android:required="false" />
+        android:required="false" tools:ignore="InvalidWearFeatureAttribute" />
     <uses-feature
         android:name="android.hardware.microphone"
         android:required="false" />
@@ -46,12 +46,16 @@
         <uses-library
             android:name="com.google.android.wearable"
             android:required="false" />
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
 
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|uiMode|smallestScreenSize|screenLayout"
             android:exported="true"
             android:launchMode="singleTop"
+            android:taskAffinity=""
             android:theme="@style/Theme.WatchOfflineTranslate">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

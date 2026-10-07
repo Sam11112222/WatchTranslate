@@ -11,10 +11,16 @@ import java.util.Date
 import java.util.Locale
 
 object Fmt {
-    private val timeFmt = SimpleDateFormat("HH:mm", Locale.getDefault())
-    private val dateFmt = SimpleDateFormat("MM-dd", Locale.getDefault())
+    // ThreadLocal prevents recreating SimpleDateFormat on every call while being thread-safe
+    private val timeFmt = object : ThreadLocal<SimpleDateFormat>() {
+        override fun initialValue() = SimpleDateFormat("HH:mm", Locale.getDefault())
+    }
 
-    fun time(ts: Long): String = timeFmt.format(Date(ts))
+    private val dateFmt = object : ThreadLocal<SimpleDateFormat>() {
+        override fun initialValue() = SimpleDateFormat("MM-dd", Locale.getDefault())
+    }
+
+    fun time(ts: Long): String = timeFmt.get()!!.format(Date(ts))
 
     fun relTime(ts: Long): String {
         val now = System.currentTimeMillis()
@@ -24,7 +30,7 @@ object Fmt {
             d < 3600_000 -> "${d / 60_000} 分钟前"
             isSameDay(ts, now) -> time(ts)
             d < 48 * 3600_000L -> "昨天"
-            else -> dateFmt.format(Date(ts))
+            else -> dateFmt.get()!!.format(Date(ts))
         }
     }
 
@@ -50,7 +56,7 @@ object Fmt {
         else String.format(Locale.US, "%.1f GB", mb / 1024.0)
     }
 
-    fun nowTime(): String = timeFmt.format(Date())
+    fun nowTime(): String = timeFmt.get()!!.format(Date())
 }
 
 object Device {
